@@ -9,6 +9,7 @@ import SignUp from '../src/Components/SignUpPage/SignUp'; // Assuming you have a
 import Footer from '../src/shared/Footer/Footer';
 import ContactUs from '../src/Components/ContactUs/ContactUs';
 import BookingForm from '..//src/Components/BookingForm/BookingForm';
+import SpecialOffers from './Components/SpecialOffers/SpecialOffers';
 
 const App = () => {
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -35,6 +36,7 @@ const App = () => {
           <Route exact path="/home" component={HomePage} />
           <Route exact path="/contact-us" component={ContactUs} />  
           <Route exact path="/manage-booking" component={BookingForm}></Route>
+          <Route exact path="/special-offers" component={SpecialOffers}></Route>
         </Switch>
         <Footer />
       </div>

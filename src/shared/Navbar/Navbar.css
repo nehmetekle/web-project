@@ -74,7 +74,12 @@
   .login:hover{
     text-decoration: none;
   }
-
-  center-section:hover{
+  .center-section a.active {
     text-decoration: underline;
-    /* color: red; */}
+    color: red;
+  }
+  
+  .center-section a:hover {
+    text-decoration: underline;
+    color: red;
+  }
