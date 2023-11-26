@@ -23,7 +23,7 @@ const OfferDetail = ({offer}) => (
             <p>Travel between: {offer.departure_date} to {offer.arrival_date} </p>
             <h2>{offer.depature}-{offer.arrival}</h2>
             <p>{offer.type}</p>
-            <p>From Eur {offer.price} *</p>
+            <p>From Eur {offer.price} €</p>
             <button className="special-button">Book</button>
           </div></div>
     )
