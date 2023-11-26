@@ -1,0 +1,80 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #232b38;
+    color: #fff;
+  }
+
+  .logo-name {
+    margin-left: 10px;
+    font-weight: bold;
+  }
+  
+  .left-section {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    max-width: 100px;
+    height: 50px;
+  } 
+  
+  .center-section {
+    gap: 40px;
+    display: flex;
+    font-weight: bold;
+  }
+  
+  .nav-item {
+    margin-right: 15px;
+    cursor: pointer;
+  }
+  
+  .right-section {
+    display: flex;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+
+  .sign-in-icon{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    margin-left: 5px;
+  }
+
+  .parent-logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    
+  }
+
+  .parent-logo:hover{
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .login:hover{
+    text-decoration: none;
+  }
+
+  center-section:hover{
+    text-decoration: underline;
+    /* color: red; */}
