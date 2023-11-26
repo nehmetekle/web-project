@@ -1,20 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { getDatabase, set, get, child, ref, remove } from 'firebase/database';
 import { db } from '..//../firebase';
-import "./SpecialOffers.css"; // Import your CSS file for styling
+import "./SpecialOffers.css";
 import video1 from "..//../images/video1.mp4";
-import basra from "..//../images/basra.jpg";
-import copenhagen from "..//../images/copenhagen.jpg";
-import amsterdam from "..//../images/amsterdam.jpg";
-import geneva from "..//../images/geneva.jpg";
-import jeddah from "..//../images/jeddah.jpg";
-import kuwait from "..//../images/kuwait.jpg";
-import london from "..//../images/london.jpg";
-import madrid from "..//../images/madrid.jpg";
-import milan from "..//../images/milan.jpg";
 import frankfurt from "..//../images/frankfurt.jpg";
-import beirut from "..//../images/beirut.jpg";
-import paris from "..//../images/paris.jpg";
 
 
 
@@ -31,9 +20,9 @@ const OfferDetail = ({offer}) => (
   <div className="offer-details">
           <div className="offer">
             <img src={frankfurt} alt={frankfurt} />
-            <p>Travel between: 09 Jun 2023 to 30 Dec 2024</p>
-            <h2>Beirut-Frankfurt</h2>
-            <p>Round Trip</p>
+            <p>Travel between: {offer.departure_date} to {offer.arrival_date} </p>
+            <h2>{offer.depature}-{offer.arrival}</h2>
+            <p>{offer.type}</p>
             <p>From Eur {offer.price} *</p>
             <button className="special-button">Book</button>
           </div></div>
