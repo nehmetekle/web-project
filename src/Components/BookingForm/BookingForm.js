@@ -20,26 +20,32 @@ const BookingForm = ({ onSubmit, onCancel }) => {
   };
 
   return (
-    <form className="booking-form" onSubmit={handleSubmit}>
-      <label>
+    <div className="container">
+      <form className="booking-form-container" onSubmit={handleSubmit}>
+      <label className="form-label">
         Booking Reference:
         <input
+          className="form-input"
           type="text"
           value={bookingReference}
           onChange={(e) => setBookingReference(e.target.value)}
         />
       </label>
-      <label>
+      <label className="form-label">
         Last Name:
         <input
+          className="form-input"
           type="text"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
         />
       </label>
-      <button type="submit">Retrieve Booking</button>
-      <button type="button" onClick={handleCancel}>Cancel Flight</button>
+     <div className="buttons">
+     <button className="form-button" type="submit">Retrieve Booking</button>
+      <button className="cancel-booking" type="button" onClick={handleCancel}>Cancel Flight</button>
+     </div>
     </form>
+    </div>
   );
 };
 

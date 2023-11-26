@@ -45,7 +45,7 @@
   }
   
   select,
-  button {
+  .special-button {
     padding: 15px;
     font-size: 16px;
     margin-bottom: 15px;
@@ -53,7 +53,7 @@
     border-radius: 8px;
   }
   
-  button {
+  .special-button {
     background-color: #007bff;
     color: white;
     border: none;
@@ -61,7 +61,7 @@
     font-size: 18px;
   }
   
-  button:hover {
+  .special-button:hover {
     background-color: #0056b3;
   }
 
@@ -75,7 +75,7 @@
   }
   
   .offer {
-    width: calc(33.33% - 20px); /* Set width for three divs in a row */
+    width: 100%;
     margin-bottom: 20px;
     background-color: #f9f9f9;
     padding: 20px;
@@ -130,8 +130,8 @@
   }
   
   .header {
-    position: relative; /* Establishes a new stacking context */
-    z-index: 1; /* Bring the text content to the foreground */
-    padding-top: 100px; /* Adjust top padding for the header */
+    position: relative; 
+    z-index: 1;
+    /* padding-top: 100px;  */
   }
   

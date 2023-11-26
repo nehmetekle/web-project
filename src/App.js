@@ -34,6 +34,7 @@ const App = () => {
             {loggedInUser ? <Redirect to="/signup" /> : <SignUp onLogin={handleLogin} />}
           </Route>
           <Route exact path="/home" component={HomePage} />
+          <Route exact path="/" component={HomePage} />
           <Route exact path="/contact-us" component={ContactUs} />  
           <Route exact path="/manage-booking" component={BookingForm}></Route>
           <Route exact path="/special-offers" component={SpecialOffers}></Route>
