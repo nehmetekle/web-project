@@ -1,0 +1,93 @@
+.container {
+  background-color: rgba(255, 255, 255, 0.8); /* Add a semi-transparent white background to the form container */
+  padding: 20px;
+  /* border-radius: 10px; */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-image: url(..//../images/login.png);
+  background-size: cover;
+  width: auto;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.login-container {
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  flex-direction: column;
+  border: 1px solid lightgray;
+  padding: 20px;
+  background-color: #ffffffb8;
+  border-radius: 20px;
+}
+
+.login-heading {
+  color: #333;
+}
+
+.login-label {
+  display: flex;
+  margin: 10px 0;
+  color: #333;
+}
+
+.login-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+}
+
+.login-button {
+  /* margin-right: 50%; */
+  margin-top: 10px;
+  width: 40%;
+  background-color: #2196F3;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.login-button:hover{
+  background-color: #2195f396;
+}
+
+.create-account-button {
+  /* margin-left: 50%; */
+  width: 40%;
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.create-account-button:hover{
+  background-color: rgba(255, 0, 0, 0.492);
+}
+
+
+.error-message{
+  display: flex;
+  color: red;
+}
+
+

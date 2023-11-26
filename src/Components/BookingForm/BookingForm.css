@@ -1,0 +1,34 @@
+/* BookingForm.css */
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .booking-form label {
+    margin-bottom: 10px;
+  }
+  
+  .booking-form input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .booking-form button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .booking-details {
+    margin-top: 20px;
+  }
+  
