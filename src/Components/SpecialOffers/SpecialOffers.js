@@ -19,7 +19,7 @@ const countries = [
 const OfferDetail = ({offer}) => (
   <div className="offer-details">
           <div className="offer">
-            <img src={frankfurt} alt={frankfurt} />
+            <img src={require('..//../images/' + offer.image)} alt={frankfurt} />
             <p>Travel between: {offer.departure_date} to {offer.arrival_date} </p>
             <h2>{offer.depature}-{offer.arrival}</h2>
             <p>{offer.type}</p>
