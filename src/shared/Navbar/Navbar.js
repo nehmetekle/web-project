@@ -9,12 +9,12 @@ const Navbar = () => {
   const location = useLocation();
 
   // Check if there is user data in localStorage
-  const userData = JSON.parse(window.sessionStorage.getItem("user"));
+  const userData = JSON.parse(window.localStorage.getItem("user"));
   const isLoggedIn = !!userData;
 
   const handleSignOut = () => {
     // Clear data from localStorage on sign-out
-    window.sessionStorage.removeItem("user");
+    window.localStorage.removeItem("user");
     // Additional sign-out logic...
 
     // Redirect to home or login page

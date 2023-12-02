@@ -61,17 +61,29 @@ const SignIn = () => {
     e.preventDefault();
 
     if (!formData.email || !formData.password) {
-      const alertBox = document.getElementById("alertBox");
-      alertBox.style.display = "block";
+      setErrors({
+        email: !formData.email ? 'Email is required' : '',
+        password: !formData.password ? 'Password is required' : '',
+      });
       return;
     }
 
     if (!userExists) {
-      const alertBox = document.getElementById("alertBox-error");
-      alertBox.style.display = "block";
+      setErrors({
+        password: 'Incorrect password',
+      });
       return;
     } else {
-      window.sessionStorage.setItem("user", JSON.stringify(currentUser));
+
+      setErrors({
+        ...errors,
+        password: '',
+      });
+
+      const { userID } = currentUser;
+      
+
+      window.localStorage.setItem("user", JSON.stringify(currentUser));
       window.location.href = "/";
     }
   };
@@ -94,6 +106,7 @@ const SignIn = () => {
             required
             className="login-input"
           />
+          {errors.email && <p className="error-message">{errors.email}</p>}
 
           <label className="login-label">Password:</label>
           <input
@@ -104,7 +117,7 @@ const SignIn = () => {
             required
             className="login-input"
           />
-          {errors.msg && <p className="error-message">{errors.msg}</p>}
+          {errors.password && <p className="error-message">{errors.password}</p>}
 
           <div className="buttons">
             <button type="submit" className="login-button">

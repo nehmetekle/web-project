@@ -35,7 +35,10 @@ const OfferDetail = ({ offer }) => (
       alt={frankfurt}
     />
     <p>
-      Travel between: {offer.departure_date} to {offer.arrival_date}{" "}
+      Departure Date: {offer.departure_date}
+    </p>
+    <p>
+    Arrival Date: {offer.arrival_date}{" "}
     </p>
     <h2>
       {offer.depature}-{offer.arrival}
@@ -54,10 +57,10 @@ const OfferDetails = ({ offersData }) => {
 };
 
 const SpecialOffers = () => {
-  const [fromCountry, setFromCountry] = useState("");
-  const [toCountry, setToCountry] = useState("");
+  // const [fromCountry, setFromCountry] = useState("");
+  // const [toCountry, setToCountry] = useState("");
   const [filteredOffers, setFilteredOffers] = useState([]);
-  const [offersData, setOffersData] = useState([]);
+  // const [offersData, setOffersData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -68,7 +71,7 @@ const SpecialOffers = () => {
 
         if (snapshot.exists()) {
           const data = snapshot.val();
-          setOffersData(data);
+          // setOffersData(data);
           setFilteredOffers(data);
         } else {
           console.log("No data available");
@@ -81,15 +84,15 @@ const SpecialOffers = () => {
     fetchData();
   }, []);
 
-  const handleFilter = () => {
-    const filtered = offersData.filter(
-      (offer) =>
-        (!fromCountry || offer.depature === fromCountry) &&
-        (!toCountry || offer.arrival === toCountry)
-    );
+  // const handleFilter = () => {
+  //   const filtered = offersData.filter(
+  //     (offer) =>
+  //       (!fromCountry || offer.depature === fromCountry) &&
+  //       (!toCountry || offer.arrival === toCountry)
+  //   );
 
-    setFilteredOffers(filtered);
-  };
+  //   setFilteredOffers(filtered);
+  // };
 
   return (
     <div className="special-offers-page">
@@ -104,7 +107,7 @@ const SpecialOffers = () => {
           <h1 className="main-title">Latest travel deals and offers</h1>
           <p className="description">Discover your next adventure with us!</p>
         </div>
-        <div className="filter-section">
+        {/* <div className="filter-section">
           <label>From:</label>
           <select
             value={fromCountry}
@@ -134,7 +137,7 @@ const SpecialOffers = () => {
               Filter
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* <OfferDetails offersData={filteredOffers} /> */}
