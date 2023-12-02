@@ -10,6 +10,7 @@ import Footer from '../src/shared/Footer/Footer';
 import ContactUs from '../src/Components/ContactUs/ContactUs';
 import BookingForm from '..//src/Components/BookingForm/BookingForm';
 import SpecialOffers from './Components/SpecialOffers/SpecialOffers';
+import FlightStatus from './Components/FllightStatus/FlightStatus';
 
 const App = () => {
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -35,6 +36,7 @@ const App = () => {
           </Route>
           <Route exact path="/home" component={HomePage} />
           <Route exact path="/" component={HomePage} />
+          <Route exact path="/flight-status" component={FlightStatus}/>
           <Route exact path="/contact-us" component={ContactUs} />  
           <Route exact path="/manage-booking" component={BookingForm}></Route>
           <Route exact path="/special-offers" component={SpecialOffers}></Route>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getDatabase, set, get, child, ref, remove } from 'firebase/database';
+import { getDatabase, set, get, child, ref, remove, onValue } from 'firebase/database';
 import { db } from '..//../firebase';
 import "./SpecialOffers.css";
 import video1 from "..//../images/video1.mp4";
@@ -8,24 +8,30 @@ import frankfurt from "..//../images/frankfurt.jpg";
 
 
 const countries = [
-  "USA",
-  "Canada",
-  "UK",
-  "France",
-  "Germany",
-  "Japan",
-  "Australia",
+  "Beirut",
+  "Kuwait",
+  "Frankfurt",
+  "Paris",
+  "London",
+  "Jeddah",
+  "Amsterdam",
+  "Basra",
+  "Geneva",
+  "Milan",
+  "Madrid",
+  "Copenhangen"
 ];
 const OfferDetail = ({offer}) => (
-  <div className="offer-details">
+  
           <div className="offer">
-            <img src={require('..//../images/' + offer.image)} alt={frankfurt} />
+            <img className="img" src={require('..//../images/' + offer.image)} alt={frankfurt} />
             <p>Travel between: {offer.departure_date} to {offer.arrival_date} </p>
             <h2>{offer.depature}-{offer.arrival}</h2>
             <p>{offer.type}</p>
             <p>From Eur {offer.price} €</p>
             <button className="special-button">Book</button>
-          </div></div>
+          </div>
+          
     )
    
   const OfferDetails = ({ offersData }) => {
@@ -37,25 +43,52 @@ const OfferDetail = ({offer}) => (
 const SpecialOffers = () => {
   const [fromCountry, setFromCountry] = useState("");
   const [toCountry, setToCountry] = useState("");
-
-  const handleFilter = () => {
-    // Implement filtering logic here based on selected countries
-    console.log(`Filtering from ${fromCountry} to ${toCountry}`);
-  };
-
-  const [offersData, setOffersData] = useState([])
+  const [filteredOffers, setFilteredOffers] = useState([]);
+  const [offersData, setOffersData] = useState([]);
 
   useEffect(() => {
-    
-const dbRef = ref(getDatabase());
-        get(child(dbRef, `special_offers`)).then((snapshot) => {
-            if (snapshot.exists()) {
-                const data = snapshot.val();
-                setOffersData(data)
-                console.log(data)
-            }
-        })
-}, [])
+    const fetchData = async () => {
+      const dbRef = ref(getDatabase());
+  
+      try {
+        const snapshot = await get(child(dbRef, 'special_offers'));
+  
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          setOffersData(data);
+          setFilteredOffers(data); // Initially, set filtered offers to all offers
+        } else {
+          // Handle case where the data does not exist
+          console.log('No data available');
+        }
+      } catch (error) {
+        // Handle errors that might occur during the asynchronous operation
+        console.error('Error fetching special offers:', error.message);
+      }
+    };
+  
+    fetchData();
+  }, []);
+  
+  const handleFilter = () => {
+    // Filter offers based on selected countries
+    const filtered = offersData.filter(
+      (offer) =>
+        (!fromCountry || offer.depature === fromCountry) &&
+        (!toCountry || offer.arrival === toCountry)
+    );
+
+    // Update only the filtered offers state
+    setFilteredOffers(filtered);
+  };
+
+
+
+
+
+
+
+
   return (
 
     <div className="special-offers-page">
@@ -65,12 +98,11 @@ const dbRef = ref(getDatabase());
           Your browser does not support the video tag.
         </video>
 
-        <div className="header">
+        <div className="header-special">
           <p className="title">Special Offers</p>
           <h1 className="main-title">Latest travel deals and offers</h1>
           <p className="description">Discover your next adventure with us!</p>
         </div>
-
         <div className="filter-section">
           <label>From:</label>
           <select
@@ -100,11 +132,22 @@ const dbRef = ref(getDatabase());
             <button className="special-button" onClick={handleFilter}>Filter</button>
             </div>
         </div>
+
+        
       </div>
 
-      <OfferDetails offersData={offersData}/>
+      
+
+      {/* <OfferDetails offersData={filteredOffers} /> */}
+      <div className="offer-details">
+      <OfferDetails offersData={filteredOffers}  />
+      </div>
+      
+     
 
     </div>
+
+    
   );
 };
 

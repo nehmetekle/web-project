@@ -16,7 +16,7 @@ const HomePage = () => {
   return (
     <div className="home-page">
       <div className="header">
-        <img src={img} alt="bg-img" cover />
+        <img className = "img-bg"src={img} alt="bg-img" cover />
         <div className="slogan">Where do you want to explore?</div>
       </div>
 

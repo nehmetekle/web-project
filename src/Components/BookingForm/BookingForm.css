@@ -1,66 +1,75 @@
-/* BookingForm.css */
-
-.container {
-  background-color: rgba(255, 255, 255, 0.8); /* Add a semi-transparent white background to the form container */
-  padding: 20px;
-  /* border-radius: 10px; */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-image: url(..//../images/airport.png);
-  background-size: cover;
-  width: auto;
-  height: 60vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.manage-booking-container {
+  /* text-align: center; */
+  margin-top: 20px;
 }
 
-.booking-form-container {
-  display: block;
+.search-section {
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  flex-direction: column;
-  border-radius: 20px;
-  padding: 20px 20px;
-  border: 1px solid lightgray;
-  padding: 20px;
-  background-color: #ffffffb8;
-  border-radius: 20px;
+  margin-bottom: 20px;
 }
 
 
-.form-label {
-  display: block;
-  justify-content: center;
-  margin-bottom: 10px;
-  align-items: center;
-}
 
-.form-input {
-  /* margin-left: 20%; */
+.input-section {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 200px; /* Adjust the width as needed */
-  padding: 5px;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
 }
 
-.form-button {
-  margin-top: 10px;
+
+input[type='text'] {
+
   padding: 10px;
+  margin: 5px;
+  width: 400px; 
+  color: #555555;
+  margin-left:70px ;
+
 }
 
-.buttons{
+.small-btn {
+  padding: 8px 12px;
+  margin: 5px;
+  font-size: 14px;
+  background-color: #900562;
+  width: 120px; 
+  margin-left: 88%;
+}
+.small-btn:hover{
+  cursor: pointer;
+  background-color: #500336;
+}
+
+.parag{
+  font-weight:light;
+  color: #900562;
+  font-size:x-large;
+  margin-left: 70px;
+
+}
+.custom-line {
+  border-top: 1px solid #900562; 
+  width: 92%; 
+  margin: 20px auto;
+  margin-top: 8px; 
+}
+
+.manage-booking-container h1{
+  font-weight: lighter;
+  color: #555555;
+  margin-left: 70px;
+  font-size:large;
+  
+  
+}
+
+
+.bookingdata {
   display: flex;
-  flex-direction: column;
-
-}
-
-.cancel-booking {
-  background-color: #ff0000; /* Customize the cancel button color */
-  color: #fff; /* Set text color to white or as needed */
-}
-
-cancel-booking:hover{
-  background-color: #a80404;
+  justify-content: center;
+  text-align: center;
 }
