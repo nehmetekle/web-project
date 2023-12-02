@@ -46,6 +46,7 @@ const ManageBooking = () => {
           value={bookingReference}
           onChange={(e) => setBookingReference(e.target.value)}
           placeholder="Booking Reference (PNR) or E-ticket number"
+          className='inputs-form'
         />
         <span className="spirit-icons query-icon"></span>
         <input
@@ -53,6 +54,7 @@ const ManageBooking = () => {
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
           placeholder="Last name"
+          className='inputs-form'
         />
         </div>
         <div className="custom-line"></div>

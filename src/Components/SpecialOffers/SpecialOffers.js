@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { getDatabase, set, get, child, ref, remove, onValue } from 'firebase/database';
-import { db } from '..//../firebase';
+import {
+  getDatabase,
+  set,
+  get,
+  child,
+  ref,
+  remove,
+  onValue,
+} from "firebase/database";
+import { db } from "..//../firebase";
 import "./SpecialOffers.css";
 import video1 from "..//../images/video1.mp4";
 import frankfurt from "..//../images/frankfurt.jpg";
-
-
 
 const countries = [
   "Beirut",
@@ -19,26 +25,33 @@ const countries = [
   "Geneva",
   "Milan",
   "Madrid",
-  "Copenhangen"
+  "Copenhangen",
 ];
-const OfferDetail = ({offer}) => (
-  
-          <div className="offer">
-            <img className="img" src={require('..//../images/' + offer.image)} alt={frankfurt} />
-            <p>Travel between: {offer.departure_date} to {offer.arrival_date} </p>
-            <h2>{offer.depature}-{offer.arrival}</h2>
-            <p>{offer.type}</p>
-            <p>From Eur {offer.price} €</p>
-            <button className="special-button">Book</button>
-          </div>
-          
-    )
-   
-  const OfferDetails = ({ offersData }) => {
-      const listOffers = offersData.map((offer) => <OfferDetail key={offer.id} offer={offer}/>)
-      return listOffers;
-  }
+const OfferDetail = ({ offer }) => (
+  <div className="offer">
+    <img
+      className="img"
+      src={require("..//../images/" + offer.image)}
+      alt={frankfurt}
+    />
+    <p>
+      Travel between: {offer.departure_date} to {offer.arrival_date}{" "}
+    </p>
+    <h2>
+      {offer.depature}-{offer.arrival}
+    </h2>
+    <p>{offer.type}</p>
+    <p>From Eur {offer.price} €</p>
+    <button className="special-button">Book</button>
+  </div>
+);
 
+const OfferDetails = ({ offersData }) => {
+  const listOffers = offersData.map((offer) => (
+    <OfferDetail key={offer.id} offer={offer} />
+  ));
+  return listOffers;
+};
 
 const SpecialOffers = () => {
   const [fromCountry, setFromCountry] = useState("");
@@ -49,48 +62,36 @@ const SpecialOffers = () => {
   useEffect(() => {
     const fetchData = async () => {
       const dbRef = ref(getDatabase());
-  
+
       try {
-        const snapshot = await get(child(dbRef, 'special_offers'));
-  
+        const snapshot = await get(child(dbRef, "special_offers"));
+
         if (snapshot.exists()) {
           const data = snapshot.val();
           setOffersData(data);
-          setFilteredOffers(data); // Initially, set filtered offers to all offers
+          setFilteredOffers(data);
         } else {
-          // Handle case where the data does not exist
-          console.log('No data available');
+          console.log("No data available");
         }
       } catch (error) {
-        // Handle errors that might occur during the asynchronous operation
-        console.error('Error fetching special offers:', error.message);
+        console.error("Error fetching special offers:", error.message);
       }
     };
-  
+
     fetchData();
   }, []);
-  
+
   const handleFilter = () => {
-    // Filter offers based on selected countries
     const filtered = offersData.filter(
       (offer) =>
         (!fromCountry || offer.depature === fromCountry) &&
         (!toCountry || offer.arrival === toCountry)
     );
 
-    // Update only the filtered offers state
     setFilteredOffers(filtered);
   };
 
-
-
-
-
-
-
-
   return (
-
     <div className="special-offers-page">
       <div className="first-section">
         <video className="video-background" autoPlay muted loop>
@@ -129,25 +130,18 @@ const SpecialOffers = () => {
             ))}
           </select>
           <div className="btn-filter">
-            <button className="special-button" onClick={handleFilter}>Filter</button>
-            </div>
+            <button className="special-button" onClick={handleFilter}>
+              Filter
+            </button>
+          </div>
         </div>
-
-        
       </div>
-
-      
 
       {/* <OfferDetails offersData={filteredOffers} /> */}
       <div className="offer-details">
-      <OfferDetails offersData={filteredOffers}  />
+        <OfferDetails offersData={filteredOffers} />
       </div>
-      
-     
-
     </div>
-
-    
   );
 };
 

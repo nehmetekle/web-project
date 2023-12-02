@@ -1,7 +1,7 @@
-// Login.js
-
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { onValue, ref } from "firebase/database";
+import { db } from "../../firebase";
 import './SignIn.css';
 
 const SignIn = () => {
@@ -17,13 +17,40 @@ const SignIn = () => {
     password: '',
   });
 
+  const [usersData, setUsersData] = useState([]);
+
+  useEffect(() => {
+    const fetchUsersData = async () => {
+      try {
+        const dataRef = ref(db, "users");
+        onValue(dataRef, (snapshot) => {
+          const fetchedData = snapshot.val();
+          if (fetchedData) {
+            const users = Object.values(fetchedData);
+            setUsersData(users);
+          }
+        });
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchUsersData();
+  }, []);
+
+  const userExists = usersData.some(
+    (user) => user.email === formData.email && user.password === formData.password
+  );
+
+  const currentUser = usersData.find(
+    (user) => user.email === formData.email && user.password === formData.password
+  );
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
     });
-    // Clear the corresponding error when the user starts typing
     setErrors({
       ...errors,
       [name]: '',
@@ -33,24 +60,19 @@ const SignIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    // if (!emailRegex.test(formData.email)) {
-    //   setErrors({
-    //     ...errors,
-    //     email: 'Invalid email address',
-    //   });
-    //   return;
-    // }
+    if (!formData.email || !formData.password) {
+      const alertBox = document.getElementById("alertBox");
+      alertBox.style.display = "block";
+      return;
+    }
 
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-
-    if (storedUser && storedUser.email === formData.email && storedUser.password === formData.password) {
-      history.push('/home');
+    if (!userExists) {
+      const alertBox = document.getElementById("alertBox-error");
+      alertBox.style.display = "block";
+      return;
     } else {
-      setErrors({
-        ...errors,
-        msg: 'Invalid username or password',
-      });
+      window.sessionStorage.setItem("user", JSON.stringify(currentUser));
+      window.location.href = "/";
     }
   };
 

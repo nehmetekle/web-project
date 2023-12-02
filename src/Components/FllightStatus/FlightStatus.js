@@ -69,11 +69,11 @@ const FlightStatus = () => {
             </div>
             <h1>Flight Status</h1>
             <div className="search-form">
-                <input type="text" value={flightNumber} placeholder="Flight Number" onChange={(e) => setFlightNumber(e.target.value)} />
+                <input type="text" value={flightNumber} placeholder="Flight Number" onChange={(e) => setFlightNumber(e.target.value)}  className='inputs-flight'/>
                 <p className="error">{flightNumberError}</p>
-                <input type="text" value={departureAirport} placeholder="Departure Airport" onChange={(e) => setDepartureAirport(e.target.value)} />
+                <input type="text" value={departureAirport} placeholder="Departure Airport" onChange={(e) => setDepartureAirport(e.target.value)}  className='inputs-flight'/>
                 <p className="error">{departureAirportError}</p>
-                <input type="text" value={arrivalAirport} placeholder="Arrival Airport" onChange={(e) => setArrivalAirport(e.target.value)} />
+                <input type="text" value={arrivalAirport} placeholder="Arrival Airport" onChange={(e) => setArrivalAirport(e.target.value)} className='inputs-flight' />
                 <p className="error">{arrivalAirportError}</p>
                 <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
                 <p className="error">{dateError}</p>
