@@ -12,6 +12,45 @@ import { db } from "..//../firebase";
 import './HomePage.css';
 import img from '../../images/bg-img.jpeg'
 
+const user = JSON.parse(localStorage.getItem('user'));
+  const handleBook = async (offerId) => {
+    try {
+      const dbRef = ref(getDatabase());
+      get(child(dbRef, "booking_history")).then((data) => {
+        if (data.exists()) {
+          const flightHistory = Object.values(data.val());
+  
+          const isFlightBooked = Object.values(flightHistory).some(
+            (entry) => entry.offer_id === offerId && entry.user_id === user.userId
+          );
+  
+          if (!isFlightBooked) {
+            const db = getDatabase();
+            const length = flightHistory.length
+            const lastId = flightHistory[length-1].id + 1;
+            set(ref(db, "booking_history/" + lastId.toString()), {
+              id: lastId,
+              offer_id: offerId,
+              user_id: user.userId,
+            });
+  
+          }
+        } else {
+          set(ref(db, "booking_history/1"), {
+            id: 1,
+            offer_id: offerId,
+            user_id: user.userId,
+          });
+        }
+      });
+    
+    } catch (error) {
+      console.error("Error booking the flight:", error.message);
+    }
+
+
+  };
+
 const OfferDetail = ({ offer }) => (
   <div className="offer">
     <img
@@ -29,7 +68,9 @@ const OfferDetail = ({ offer }) => (
     </h2>
     <p>{offer.type}</p>
     <p>From Eur {offer.price} €</p>
-    <button className="special-button">Book</button>
+    <button className="special-button" onClick={() => handleBook(offer.id)}>
+      Book
+    </button>
   </div>
 );
 
@@ -39,8 +80,6 @@ const OfferDetails = ({ offersData }) => {
   ));
   return listOffers;
 };
-
-
 
 const HomePage = () => {
   const [fromDestination, setFromDestination] = useState('');
@@ -73,8 +112,10 @@ const HomePage = () => {
     fetchData();
   }, []);
 
-  const handleSearch = () => {
+  
+  
 
+  const handleSearch = () => {
     const filtered = offersData.filter(
       (offer) =>
         (!fromDestination || offer.depature === fromDestination) &&
@@ -87,7 +128,7 @@ const HomePage = () => {
   return (
     <div className="home-page">
       <div className="header">
-        <img className = "img-bg"src={img} alt="bg-img" cover />
+        <img className="img-bg" src={img} alt="bg-img" cover />
         <div className="slogan">Where do you want to explore?</div>
       </div>
 
@@ -135,8 +176,6 @@ const HomePage = () => {
             </div>
           </div>
 
-          
-
           <button className="search-button" onClick={handleSearch}>
             Search
           </button>
@@ -144,9 +183,10 @@ const HomePage = () => {
       </div>
 
       <div className="offer-details">
-        <OfferDetails offersData={filteredOffers} />
+        <OfferDetails
+          offersData={filteredOffers}
+        />
       </div>
-
     </div>
   );
 };
