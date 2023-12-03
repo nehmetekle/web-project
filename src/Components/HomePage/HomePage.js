@@ -53,6 +53,8 @@ const handleBook = async (offerId) => {
     } else {
       const eTicket = generateETicket();
 
+      
+
       set(ref(db, "booking_history/1"), {
         id: 1,
         offerId: offerId,
@@ -60,6 +62,7 @@ const handleBook = async (offerId) => {
         eTicket: eTicket,
       });
 
+      window.localStorage.setItem("eTicket", eTicket);
       console.log(`Flight with offer ID ${offerId} booked for user ${user.userId}. E-ticket: ${eTicket}`);
     }
   } catch (error) {
