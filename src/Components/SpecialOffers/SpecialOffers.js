@@ -44,7 +44,7 @@ const OfferDetail = ({ offer }) => (
       {offer.depature}-{offer.arrival}
     </h2>
     <p>{offer.type}</p>
-    <p>From Eur {offer.price} €</p>
+    <p>For {offer.price} €</p>
     <button className="special-button">Book</button>
   </div>
 );
