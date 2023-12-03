@@ -13,43 +13,60 @@ import './HomePage.css';
 import img from '../../images/bg-img.jpeg'
 
 const user = JSON.parse(localStorage.getItem('user'));
-  const handleBook = async (offerId) => {
-    try {
-      const dbRef = ref(getDatabase());
-      get(child(dbRef, "booking_history")).then((data) => {
-        if (data.exists()) {
-          const flightHistory = Object.values(data.val());
-  
-          const isFlightBooked = Object.values(flightHistory).some(
-            (entry) => entry.offer_id === offerId && entry.user_id === user.userId
-          );
-  
-          if (!isFlightBooked) {
-            const db = getDatabase();
-            const length = flightHistory.length
-            const lastId = flightHistory[length-1].id + 1;
-            set(ref(db, "booking_history/" + lastId.toString()), {
-              id: lastId,
-              offer_id: offerId,
-              user_id: user.userId,
-            });
-  
-          }
-        } else {
-          set(ref(db, "booking_history/1"), {
-            id: 1,
-            offer_id: offerId,
-            user_id: user.userId,
-          });
-        }
+
+const generateETicket = () => {
+  const firstLetter = user.email.charAt(0).toUpperCase();
+  const randomNumbers = Math.floor(100 + Math.random() * 900);
+  return `${firstLetter}${randomNumbers}`;
+};
+
+const handleBook = async (offerId) => {
+  try {
+    const dbRef = ref(getDatabase());
+    const bookingHistoryRef = child(dbRef, "booking_history");
+
+    const data = await get(bookingHistoryRef);
+
+    if (data.exists()) {
+      const flightHistory = Object.values(data.val());
+
+      const isFlightBooked = flightHistory.some(
+        (entry) => entry.offerId === offerId && entry.user_id.userId === user.userId
+      );
+
+      if (!isFlightBooked) {
+        const db = getDatabase();
+        const length = flightHistory.length;
+        const lastId = length > 0 ? flightHistory[length - 1].id + 1 : 1;
+
+        const eTicket = generateETicket();
+
+        set(ref(db, `booking_history/${lastId.toString()}`), {
+          id: lastId,
+          offerId: offerId,
+          user_id: user,
+          eTicket: eTicket,
+        });
+
+        console.log(`Flight with offer ID ${offerId} booked for user ${user.userId}. E-ticket: ${eTicket}`);
+      }
+    } else {
+      const eTicket = generateETicket();
+
+      set(ref(db, "booking_history/1"), {
+        id: 1,
+        offerId: offerId,
+        user_id: user,
+        eTicket: eTicket,
       });
-    
-    } catch (error) {
-      console.error("Error booking the flight:", error.message);
+
+      console.log(`Flight with offer ID ${offerId} booked for user ${user.userId}. E-ticket: ${eTicket}`);
     }
+  } catch (error) {
+    console.error("Error booking the flight:", error.message);
+  }
+};
 
-
-  };
 
 const OfferDetail = ({ offer }) => (
   <div className="offer">

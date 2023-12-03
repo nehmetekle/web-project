@@ -31,9 +31,9 @@ const Navbar = () => {
       </div>
       <div className="center-section">
       <div className="center-section">
-        <Link to="/flight-status" className={location.pathname === "/flight-status" ? "active" : ""}>
+        {/* <Link to="/flight-status" className={location.pathname === "/flight-status" ? "active" : ""}>
           <span>Flight Status</span>
-        </Link>
+        </Link> */}
         <Link to="/manage-booking" className={location.pathname === "/manage-booking" ? "active" : ""}>
           <span>Manage Booking</span>
         </Link>
