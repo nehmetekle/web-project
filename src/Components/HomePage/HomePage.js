@@ -44,7 +44,7 @@ const handleBook = async (offerId) => {
         set(ref(db, `booking_history/${lastId.toString()}`), {
           id: lastId,
           offerId: offerId,
-          user_id: user,
+          user_id: user.userId,
           eTicket: eTicket,
         });
 
@@ -58,7 +58,7 @@ const handleBook = async (offerId) => {
       set(ref(db, "booking_history/1"), {
         id: 1,
         offerId: offerId,
-        user_id: user,
+        user_id: user.userId,
         eTicket: eTicket,
       });
 

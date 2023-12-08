@@ -72,3 +72,29 @@
   justify-content: center;
   text-align: center;
 }
+
+
+.flight-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.flight-table th, .flight-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.flight-table th {
+  background-color: #900562;
+  color: #fff;
+}
+
+.flight-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.flight-table tr:hover {
+  background-color: #ddd;
+}
