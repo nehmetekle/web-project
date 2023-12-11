@@ -98,3 +98,10 @@
 .flight-table tr:hover {
   background-color: #ddd;
 }
+
+.flight-table button {
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  cursor: pointer;
+}
